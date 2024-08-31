@@ -1,0 +1,12 @@
+{% extends 'products/base.html' %}
+
+{% block content %}
+    <h2>Update Stock for {{ product.code }}</h2>
+    <p>Current stock: {{ product.stock }}</p>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="stock_change">Change in stock (negative for decrease):</label>
+        <input type="number" name="stock_change" required>
+        <button type="submit">Update Stock</button>
+    </form>
+{% endblock %}

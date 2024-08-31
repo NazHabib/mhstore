@@ -1,0 +1,126 @@
+{% extends 'products/base.html' %}
+
+{% block content %}
+    <style>
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-input {
+            padding: 8px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .sort-select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .product-item {
+            width: 18%; /* Adjust this value if needed */
+            margin-bottom: 20px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .product-item p {
+            margin-bottom: 10px;
+        }
+
+        .product-item a {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .product-item a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <h2>Search Product</h2>
+    <form method="GET" class="search-form" id="search-form">
+        <div class="form-group">
+            <input type="text" name="q" placeholder="Enter product code" class="search-input" value="{{ request.GET.q }}">
+            <button type="submit" class="search-button">Search</button>
+        </div>
+        <div class="form-group">
+            <label for="sort-by">Sort By:</label>
+            <select name="sort_by" id="sort-by" class="sort-select">
+                <option value="price_asc" {% if request.GET.sort_by == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                <option value="price_desc" {% if request.GET.sort_by == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                <option value="stock_asc" {% if request.GET.sort_by == 'stock_asc' %}selected{% endif %}>Stock: Low to High</option>
+                <option value="stock_desc" {% if request.GET.sort_by == 'stock_desc' %}selected{% endif %}>Stock: High to Low</option>
+                <option value="alphabetical_asc" {% if request.GET.sort_by == 'alphabetical_asc' %}selected{% endif %}>Type: A to Z</option>
+                <option value="alphabetical_desc" {% if request.GET.sort_by == 'alphabetical_desc' %}selected{% endif %}>Type: Z to A</option>
+            </select>
+        </div>
+    </form>
+
+    {% if products %}
+        <h3>Search Results</h3>
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-item">
+                    <p><strong>Code:</strong> {{ product.code }}</p>
+                    <p><strong>Type:</strong> {{ product.type }}</p>
+                    <p><strong>Stock:</strong> {{ product.stock }}</p>
+                    <p><strong>Price to Sell:</strong> ${{ product.price_sell }}</p>
+                    <p><strong>Location:</strong> {{ product.location }}</p>
+                    <a href="{% url 'update_stock' product.code %}">Update Stock</a>
+                </div>
+                {% if forloop.counter|divisibleby:5 %}
+                    <div style="clear: both;"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No products found.</p>
+    {% endif %}
+
+    <script>
+        // Automatically submit the form when the sorting option is changed
+        document.getElementById('sort-by').addEventListener('change', function() {
+            document.getElementById('search-form').submit();
+        });
+    </script>
+{% endblock %}
