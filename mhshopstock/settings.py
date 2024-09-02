@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "products",
+    "sslserver",
 ]
 
 MIDDLEWARE = [
@@ -153,7 +154,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Other static file settings
 STATIC_URL = '/static/'
 
-"""
+
 SECURE_HSTS_SECONDS = 31536000  # Force HTTPS by setting HSTS header
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
@@ -161,4 +162,3 @@ SECURE_SSL_REDIRECT = True  # Redirect all HTTP traffic to HTTPS
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = 'DENY'
-"""
