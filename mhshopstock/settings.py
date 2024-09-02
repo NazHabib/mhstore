@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "products",
-    "sslserver",
 ]
+import os
+
+if os.getenv('DJANGO_DEVELOPMENT') == 'True':
+    INSTALLED_APPS += ['sslserver']
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

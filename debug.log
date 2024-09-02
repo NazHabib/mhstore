@@ -6664,3 +6664,6 @@ C:\Users\nazmu\mhshopstock\products\templates\products notified as changed. Sign
 File C:\Users\nazmu\mhshopstock\products\templates\products\search.html previous mtime: 1725268105.0428848, current mtime: 1725268245.9789653
 C:\Users\nazmu\mhshopstock\products\templates\products\search.html notified as changed. Signal results: [(<function template_changed at 0x000001AC5E57D8B0>, True), (<function translation_file_changed at 0x000001AC5EFD28B0>, None)].
 "GET /products/search/?q=208&sort_by=price_asc HTTP/1.1" 200 3972
+File C:\Users\nazmu\mhshopstock\mhshopstock\settings.py previous mtime: 1725267995.8357148, current mtime: 1725269723.5808089
+C:\Users\nazmu\mhshopstock\mhshopstock\settings.py notified as changed. Signal results: [(<function template_changed at 0x000001AC5E57D8B0>, None), (<function translation_file_changed at 0x000001AC5EFD28B0>, None)].
+C:\Users\nazmu\mhshopstock\mhshopstock\settings.py changed, reloading.
